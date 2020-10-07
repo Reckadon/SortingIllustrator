@@ -10,14 +10,15 @@ import java.util.Random;
 
 public class Controller {
     public BarChart BCArray;// BC for Barchart
-    @FXML public Button btnSort;
-    @FXML public Slider sizeSlider;
-    @FXML public Button btnGenerate;
+    @FXML public static Button btnSort;
+    @FXML public static Slider sizeSlider;
+    @FXML public static Button btnGenerate;
     public static void arrayGenerate(){
+        sizeSlider.onMouseReleasedProperty();
+        int sliderValue=(int) sizeSlider.getValue();
         Random rand =new Random();
-        int arraySize=rand.nextInt(95);
-        int array[]= new int[arraySize];
-        for(int i=0;i<arraySize;i++){
+        int array[]= new int[sliderValue];
+        for(int i=0;i<sliderValue;i++){
             array[i]= rand.nextInt(80);
         }
 
