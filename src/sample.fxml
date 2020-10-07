@@ -21,7 +21,7 @@
       <Slider fx:id="sizeSlider" onMouseDragged="#arrayGenerate" layoutX="356.0" layoutY="616.0" majorTickUnit="10" max="95" min="5" prefHeight="74.0" prefWidth="316.0" showTickLabels="true" showTickMarks="true" value="10">
          </Slider>
       <Label layoutX="456.0" layoutY="616.0" prefHeight="23.0" prefWidth="116.0" text="Array Size and Speed" />
-      <Button fx:id="btnGenerate" layoutX="72.0" layoutY="616.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="197.0" text="Generate New Array">
+      <Button fx:id="btnGenerate" onMouseClicked="#arrayGenerate" layoutX="72.0" layoutY="616.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="197.0" text="Generate New Array">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
