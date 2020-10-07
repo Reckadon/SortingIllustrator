@@ -12,16 +12,16 @@
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <children>
-      <Button fx:id="btnSort" onMouseClicked="#arraySort" layoutX="791.0" layoutY="616.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="181.0" text="Sort" textFill="RED">
+      <Button fx:id="btnSort" onMouseClicked="#arrayGenerate" layoutX="791.0" layoutY="616.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="181.0" text="Sort" textFill="RED">
          <font>
             <Font name="Symbol" size="25.0" />
          </font>
       </Button>
       <Separator layoutX="-1.0" layoutY="597.0" prefHeight="6.0" prefWidth="984.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Slider fx:id="sizeSlider" onMouseDragged="#arrayGenerate" onMouseClicked="#arrayGenerate" layoutX="356.0" layoutY="616.0" majorTickUnit="10" max="95" min="5" prefHeight="74.0" prefWidth="316.0" showTickLabels="true" showTickMarks="true" value="10">
-      </Slider>
+      <Slider fx:id="sizeSlider" layoutX="356.0" layoutY="616.0" majorTickUnit="10" max="95" min="5" onMouseClicked="#arrayGenerate" onMouseDragged="#arrayGenerate" prefHeight="74.0" prefWidth="316.0" showTickLabels="true" showTickMarks="true" value="10">
+         </Slider>
       <Label layoutX="456.0" layoutY="616.0" prefHeight="23.0" prefWidth="116.0" text="Array Size and Speed" />
-      <Button fx:id="btnGenerate" onMouseClicked="#arrayGenerate" layoutX="72.0" layoutY="616.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="197.0" text="Generate New Array">
+      <Button fx:id="btnGenerate" layoutX="72.0" layoutY="616.0" mnemonicParsing="false" onMouseClicked="#arrayGenerate" prefHeight="63.0" prefWidth="197.0" text="Generate New Array">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
@@ -42,7 +42,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <BarChart fx:id="BCArray" layoutX="16.0" layoutY="10.0" prefHeight="571.0" prefWidth="951.0" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" animated="false">
+      <BarChart fx:id="BCArray" animated="false" barGap="2.0" categoryGap="1.0" layoutX="16.0" layoutY="10.0" prefHeight="571.0" prefWidth="951.0" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
