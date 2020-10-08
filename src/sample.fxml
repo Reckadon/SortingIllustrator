@@ -50,6 +50,11 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </BarChart>
+      <Label layoutX="15.0" layoutY="690.0" text="Developed by Romit Mohane and Nilay Verma in 2020" textAlignment="CENTER" textFill="#a43030" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <font>
+            <Font name="Ebrima" size="12.0" />
+         </font>
+      </Label>
 
    </children>
 </AnchorPane>
