@@ -23,7 +23,9 @@ public class Controller {
     boolean sorting;
     private Random rand =new Random();
 
+    //TODO duplicates ka kuch karna hai
     public void arrayGenerate() {
+        //TODO slider pe valueChanged listener lagana hai instead of mouse dragged and all
         sliderValue=(int) sizeSlider.getValue();
         array= new int[sliderValue];
         for(int i=0;i<array.length;i++){
@@ -31,8 +33,8 @@ public class Controller {
         }
         updateChart(array);
         if(array.length ==0 || array.length <=20) delay=60;
-        else if(array.length >20 || array.length <=40) delay = 33;
-        else if(array.length >40 || array.length <=60) delay = 18;
+        else if(array.length <=40) delay = 33;
+        else if(array.length <=60) delay = 18;
         else delay =10;
     }
 
@@ -44,6 +46,7 @@ public class Controller {
         btnGenerate.setDisable(true);
         sizeSlider.setDisable(true);
 
+        //TODO idhar bhi bugs hai
         Timer outerTimer =new Timer();
         outerTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -91,7 +94,7 @@ public class Controller {
                     sorting=false;
                 }
             }
-        },0,array.length *delay);
+        },0,array.length *delay+10);
     }
 
 
@@ -107,6 +110,7 @@ public class Controller {
         BCArray.setTitle("Random Array of Size "+sliderValue+" elements");
         BCArray.setLegendVisible(true);
 
+        //TODO pure chart ka colour set karna hai with background
         if (sorting){
             n = BCArray.lookup(".data"+j+".chart-bar");
             n.setStyle("-fx-bar-fill: green");
