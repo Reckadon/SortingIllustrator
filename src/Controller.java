@@ -1,5 +1,6 @@
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
@@ -18,7 +19,8 @@ public class Controller {
     @FXML public Button btnGenerate;
     int array[];
     int sliderValue;
-    int delay=1000;
+    private int delay=30;
+    boolean sorting;
     private Random rand =new Random();
 
     public void arrayGenerate() {
@@ -30,15 +32,19 @@ public class Controller {
         updateChart(array);
     }
 
-    private int i=0,j=0;
+    private int i=0,j=0,count=0;
+    private Node n;
     public void arraySort() {
+        sorting=true;
         btnSort.setDisable(true);
         btnGenerate.setDisable(true);
         sizeSlider.setDisable(true);
+
         Timer outerTimer =new Timer();
         outerTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+                count=0;
                 Timer innerTimer =new Timer();
                 innerTimer.scheduleAtFixedRate(new TimerTask() {
                     @Override
@@ -47,13 +53,21 @@ public class Controller {
                             int t=array[j];
                             array[j]=array[j+1];
                             array[j+1]=t;
-                        }
+                        }else count++;
 
                         Platform.runLater(new Runnable() {
                             public void run() {
                                 updateChart(array);
                             }
                         });
+                        if (count==array.length-1){
+                            innerTimer.cancel();
+                            outerTimer.cancel();
+                            btnSort.setDisable(false);
+                            btnGenerate.setDisable(false);
+                            sizeSlider.setDisable(false);
+                            sorting=false;
+                        }
                         j++;
                         System.out.println(j);
                         if (j==array.length-1){
@@ -62,7 +76,6 @@ public class Controller {
                         }
                     }
                 },0,delay);
-
                 i++;
                 System.out.println(i+"st Timer");
                 if (i==array.length-1){
@@ -71,6 +84,7 @@ public class Controller {
                     btnSort.setDisable(false);
                     btnGenerate.setDisable(false);
                     sizeSlider.setDisable(false);
+                    sorting=false;
                 }
             }
         },0,array.length *delay);
@@ -88,6 +102,13 @@ public class Controller {
         BCArray.getData().setAll(series);
         BCArray.setTitle("Random Array of Size "+sliderValue+" elements");
         BCArray.setLegendVisible(true);
+
+        if (sorting){
+            n = BCArray.lookup(".data"+j+".chart-bar");
+            n.setStyle("-fx-bar-fill: green");
+            n = BCArray.lookup(".data"+(j+1)+".chart-bar");
+            n.setStyle("-fx-bar-fill: green");
+        }
         System.out.println("from update");
     }
 
@@ -95,6 +116,7 @@ public class Controller {
     @FXML
     public void initialize() {
          arrayGenerate();
+         sizeSlider.setShowTickLabels(false);
     }
 
 }
