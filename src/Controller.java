@@ -30,6 +30,10 @@ public class Controller {
             array[i]= rand.nextInt(496)+5;
         }
         updateChart(array);
+        if(array.length ==0 || array.length <=20) delay=60;
+        else if(array.length >20 || array.length <=40) delay = 33;
+        else if(array.length >40 || array.length <=60) delay = 18;
+        else delay =10;
     }
 
     private int i=0,j=0,count=0;
@@ -115,8 +119,8 @@ public class Controller {
 
     @FXML
     public void initialize() {
-         arrayGenerate();
-         sizeSlider.setShowTickLabels(false);
+        arrayGenerate();
+        sizeSlider.setShowTickLabels(false);
     }
 
 }
