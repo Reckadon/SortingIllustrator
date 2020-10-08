@@ -12,7 +12,7 @@
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <children>
-      <Button fx:id="btnSort" onMouseClicked="#arrayGenerate" layoutX="791.0" layoutY="616.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="181.0" text="Sort" textFill="RED">
+      <Button fx:id="btnSort" layoutX="791.0" layoutY="616.0" mnemonicParsing="false" onMouseClicked="#arraySort" prefHeight="63.0" prefWidth="181.0" text="Sort" textFill="RED">
          <font>
             <Font name="Symbol" size="25.0" />
          </font>
