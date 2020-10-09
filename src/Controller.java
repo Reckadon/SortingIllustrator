@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -32,6 +33,36 @@ public class Controller {
         for(int i=0;i<array.length;i++){
             array[i]= rand.nextInt(496)+5;
         }
+        // Sorting array
+        for(int i=0;i<array.length;i++){
+            for(int j=0;j<array.length-1;j++){
+                if(array[j]>array[j+1]){
+                    int t=array[j];
+                    array[j]=array[j+1];
+                    array[j+1]=t;
+                }
+            }
+        }
+        // Checking for duplicates
+        for(int i=0;i<array.length;i++){
+            for(int j=0;j<array.length-1;j++){
+                if(array[j]==array[j+1]){
+                    array[j]=rand.nextInt(496)+5;
+                }
+            }
+        }
+        //Shuffling array
+        for(int i=0;i<array.length;i++){
+            for(int j=0;j<array.length-1;j++){
+                int arrayrandomer = rand.nextInt(4);
+                if(arrayrandomer==1 || arrayrandomer==2){
+                    int t=array[j];
+                    array[j]=array[j+1];
+                    array[j+1]=t;
+                }
+            }
+        }
+       System.out.println(Arrays.toString(array));
         updateChart(array);
         if(array.length ==0 || array.length <=20) delay=60;
         else if(array.length <=40) delay = 33;
@@ -115,16 +146,18 @@ public class Controller {
 
         //TODO pure chart ka colour set karna hai with background
         if (sorting){
+            BCArray.setTitle("Bubble sorting Array");
             BCArray.lookupAll(".default-color0.chart-bar")
                     .forEach(n -> n.setStyle("-fx-bar-fill: #202020;"));                              //all bars
             BCArray.lookup(".chart-plot-background").setStyle("-fx-background-color: #ccebff;");   //chart bg
             BCArray.setStyle("-fx-background-color: #ccebff;");
-            pane.setStyle("-fx-background-color: #ccebff;");                                          //application bg
+            pane.setStyle("-fx-background-color: #ccebff");                                          //application bg
             n = BCArray.lookup(".data"+j+".chart-bar");                                            // J and i
-            n.setStyle("-fx-bar-fill: green");
+            n.setStyle("-fx-bar-fill: #ff0000");
             n = BCArray.lookup(".data"+(j+1)+".chart-bar");
-            n.setStyle("-fx-bar-fill: green");
+            n.setStyle("-fx-bar-fill: #ff0000");
         }else {
+            BCArray.setTitle("Random Array  of "+array.length+" elements");
             BCArray.lookup(".chart-plot-background").setStyle("-fx-background-color: light-grey;");//chart bg
             BCArray.setStyle("-fx-background-color: light-grey;");
             pane.setStyle("-fx-background-color: light-grey;");
@@ -145,7 +178,7 @@ public class Controller {
                     arrayGenerate();
                 }
         );
-        sizeSlider.setShowTickLabels(true);
+        sizeSlider.setShowTickLabels(true); //ye kya kiya hai???
     }
 
 }
