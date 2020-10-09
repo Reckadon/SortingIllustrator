@@ -12,15 +12,16 @@
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <children>
+      <Label layoutX="495.0" layoutY="647.0" prefHeight="27.0" prefWidth="111.0" text=" Speed" textAlignment="CENTER" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="411.0" />
       <Button fx:id="btnSort" layoutX="791.0" layoutY="616.0" mnemonicParsing="false" onMouseClicked="#arraySort" prefHeight="63.0" prefWidth="181.0" text="Bubble Sort" textFill="RED" AnchorPane.bottomAnchor="30.0">
          <font>
             <Font name="Symbol" size="25.0" />
          </font>
       </Button>
       <Separator layoutX="30.0" layoutY="565.0" prefHeight="38.0" prefWidth="972.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-      <Slider fx:id="sizeSlider" layoutX="356.0" layoutY="616.0" majorTickUnit="10" max="95" min="5" prefHeight="74.0" prefWidth="316.0" showTickLabels="true" showTickMarks="true" value="10" AnchorPane.bottomAnchor="15.0">
+      <Slider fx:id="sizeSlider" layoutX="356.0" layoutY="616.0" majorTickUnit="10" max="95" min="5" prefHeight="88.0" prefWidth="302.0" showTickLabels="true" showTickMarks="true" value="10" AnchorPane.bottomAnchor="20.0">
          </Slider>
-      <Label layoutX="456.0" layoutY="616.0" prefHeight="23.0" prefWidth="116.0" text="Array Size and Speed" AnchorPane.bottomAnchor="65.0" />
+      <Label layoutX="486.0" layoutY="616.0" prefHeight="17.0" prefWidth="88.0" text="Array Size" textAlignment="CENTER" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="456.0" AnchorPane.rightAnchor="456.0" />
       <Button fx:id="btnGenerate" layoutX="72.0" layoutY="616.0" mnemonicParsing="false" onMouseClicked="#arrayGenerate" prefHeight="63.0" prefWidth="197.0" text="Generate New Array" AnchorPane.bottomAnchor="30.0">
          <font>
             <Font name="Arial" size="18.0" />
@@ -42,7 +43,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <BarChart fx:id="BCArray" title="Bubble Sort" animated="false" barGap="2.0" categoryGap="1.0" layoutX="16.0" layoutY="10.0" prefHeight="571.0" prefWidth="951.0" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BarChart fx:id="BCArray" animated="false" barGap="2.0" categoryGap="1.0" layoutX="16.0" layoutY="10.0" prefHeight="571.0" prefWidth="951.0" title="Bubble Sort" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -55,6 +56,7 @@
             <Font name="Ebrima" size="12.0" />
          </font>
       </Label>
+      <Slider fx:id="speedSlider" blockIncrement="1.0" layoutX="357.0" layoutY="666.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="28.0" prefWidth="302.0" showTickMarks="true" value="1.0" AnchorPane.bottomAnchor="10.0" />
 
    </children>
 </AnchorPane>
