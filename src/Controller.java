@@ -5,6 +5,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.AnchorPane;
 
 import java.util.Random;
 import java.util.Timer;
@@ -17,6 +18,7 @@ public class Controller {
     @FXML public Button btnSort;
     @FXML public Slider sizeSlider;
     @FXML public Button btnGenerate;
+    public AnchorPane pane;
     int array[];
     int sliderValue;
     private int delay=30;
@@ -25,7 +27,6 @@ public class Controller {
 
     //TODO duplicates ka kuch karna hai
     public void arrayGenerate() {
-        //TODO slider pe valueChanged listener lagana hai instead of mouse dragged and all
         sliderValue=(int) sizeSlider.getValue();
         array= new int[sliderValue];
         for(int i=0;i<array.length;i++){
@@ -34,7 +35,7 @@ public class Controller {
         updateChart(array);
         if(array.length ==0 || array.length <=20) delay=60;
         else if(array.length <=40) delay = 33;
-        else if(array.length <=60) delay = 18;
+        else if(array.length <=60) delay = 15;
         else delay =10;
     }
 
@@ -46,7 +47,6 @@ public class Controller {
         btnGenerate.setDisable(true);
         sizeSlider.setDisable(true);
 
-        //TODO idhar bhi bugs hai
         Timer outerTimer =new Timer();
         outerTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -74,12 +74,15 @@ public class Controller {
                             btnGenerate.setDisable(false);
                             sizeSlider.setDisable(false);
                             sorting=false;
+                            j=0;
+                            i=0;
                         }
                         j++;
                         System.out.println(j);
                         if (j==array.length-1){
                             innerTimer.cancel();
                             j=0;
+                            i=0;
                         }
                     }
                 },0,delay);
@@ -88,6 +91,7 @@ public class Controller {
                 if (i==array.length-1){
                     outerTimer.cancel();
                     i=0;
+                    j=0;
                     btnSort.setDisable(false);
                     btnGenerate.setDisable(false);
                     sizeSlider.setDisable(false);
@@ -107,15 +111,23 @@ public class Controller {
         }
         series.setName("Numbers");
         BCArray.getData().setAll(series);
-        BCArray.setTitle("Random Array of Size "+sliderValue+" elements");
         BCArray.setLegendVisible(true);
 
         //TODO pure chart ka colour set karna hai with background
         if (sorting){
-            n = BCArray.lookup(".data"+j+".chart-bar");
+            BCArray.lookupAll(".default-color0.chart-bar")
+                    .forEach(n -> n.setStyle("-fx-bar-fill: #202020;"));                              //all bars
+            BCArray.lookup(".chart-plot-background").setStyle("-fx-background-color: #ccebff;");   //chart bg
+            BCArray.setStyle("-fx-background-color: #ccebff;");
+            pane.setStyle("-fx-background-color: #ccebff;");                                          //application bg
+            n = BCArray.lookup(".data"+j+".chart-bar");                                            // J and i
             n.setStyle("-fx-bar-fill: green");
             n = BCArray.lookup(".data"+(j+1)+".chart-bar");
             n.setStyle("-fx-bar-fill: green");
+        }else {
+            BCArray.lookup(".chart-plot-background").setStyle("-fx-background-color: light-grey;");//chart bg
+            BCArray.setStyle("-fx-background-color: light-grey;");
+            pane.setStyle("-fx-background-color: light-grey;");
         }
         System.out.println("from update");
     }
@@ -124,7 +136,16 @@ public class Controller {
     @FXML
     public void initialize() {
         arrayGenerate();
-        sizeSlider.setShowTickLabels(false);
+        sizeSlider.valueProperty().addListener(
+                (options, oldValue, newValue) ->
+                {
+                    if (newValue.equals(oldValue))
+                        return;
+                    sliderValue=newValue.intValue();
+                    arrayGenerate();
+                }
+        );
+        sizeSlider.setShowTickLabels(true);
     }
 
 }

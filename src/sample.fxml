@@ -7,21 +7,21 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700" prefWidth="1000" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700" prefWidth="1000" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <padding>
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <children>
-      <Button fx:id="btnSort" layoutX="791.0" layoutY="616.0" mnemonicParsing="false" onMouseClicked="#arraySort" prefHeight="63.0" prefWidth="181.0" text="Sort" textFill="RED">
+      <Button fx:id="btnSort" layoutX="791.0" layoutY="616.0" mnemonicParsing="false" onMouseClicked="#arraySort" prefHeight="63.0" prefWidth="181.0" text="Sort" textFill="RED" AnchorPane.bottomAnchor="30.0">
          <font>
             <Font name="Symbol" size="25.0" />
          </font>
       </Button>
-      <Separator layoutX="-1.0" layoutY="597.0" prefHeight="6.0" prefWidth="984.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Slider fx:id="sizeSlider" layoutX="356.0" layoutY="616.0" majorTickUnit="10" max="95" min="5" onMouseClicked="#arrayGenerate" onMouseDragged="#arrayGenerate" prefHeight="74.0" prefWidth="316.0" showTickLabels="true" showTickMarks="true" value="10">
+      <Separator layoutX="30.0" layoutY="565.0" prefHeight="38.0" prefWidth="972.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <Slider fx:id="sizeSlider" layoutX="356.0" layoutY="616.0" majorTickUnit="10" max="95" min="5" prefHeight="74.0" prefWidth="316.0" showTickLabels="true" showTickMarks="true" value="10" AnchorPane.bottomAnchor="15.0">
          </Slider>
-      <Label layoutX="456.0" layoutY="616.0" prefHeight="23.0" prefWidth="116.0" text="Array Size and Speed" />
-      <Button fx:id="btnGenerate" layoutX="72.0" layoutY="616.0" mnemonicParsing="false" onMouseClicked="#arrayGenerate" prefHeight="63.0" prefWidth="197.0" text="Generate New Array">
+      <Label layoutX="456.0" layoutY="616.0" prefHeight="23.0" prefWidth="116.0" text="Array Size and Speed" AnchorPane.bottomAnchor="65.0" />
+      <Button fx:id="btnGenerate" layoutX="72.0" layoutY="616.0" mnemonicParsing="false" onMouseClicked="#arrayGenerate" prefHeight="63.0" prefWidth="197.0" text="Generate New Array" AnchorPane.bottomAnchor="30.0">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
@@ -42,7 +42,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <BarChart fx:id="BCArray" animated="false" barGap="2.0" categoryGap="1.0" layoutX="16.0" layoutY="10.0" prefHeight="571.0" prefWidth="951.0" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BarChart fx:id="BCArray" title="Bubble Sort" animated="false" barGap="2.0" categoryGap="1.0" layoutX="16.0" layoutY="10.0" prefHeight="571.0" prefWidth="951.0" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
