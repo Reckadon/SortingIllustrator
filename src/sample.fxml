@@ -12,8 +12,8 @@
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
    <children>
-      <Label layoutX="495.0" layoutY="647.0" prefHeight="27.0" prefWidth="111.0" text=" Speed" textAlignment="CENTER" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="411.0" />
-      <Button fx:id="btnSort" layoutX="791.0" layoutY="616.0" mnemonicParsing="false" onMouseClicked="#arraySort" prefHeight="63.0" prefWidth="181.0" text="Bubble Sort" textFill="RED" AnchorPane.bottomAnchor="30.0">
+      <Label layoutX="495.0" layoutY="647.0" prefHeight="27.0" prefWidth="111.0" text=" Speed" textAlignment="CENTER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="411.0" />
+      <Button fx:id="btnSort" layoutX="735.0" layoutY="621.0" mnemonicParsing="false" onMouseClicked="#sort" prefHeight="53.0" prefWidth="212.0" text="Sort" textFill="RED">
          <font>
             <Font name="Symbol" size="25.0" />
          </font>
@@ -56,7 +56,8 @@
             <Font name="Ebrima" size="12.0" />
          </font>
       </Label>
-      <Slider fx:id="speedSlider" blockIncrement="1.0" layoutX="357.0" layoutY="666.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="28.0" prefWidth="302.0" showTickMarks="true" value="1.0" AnchorPane.bottomAnchor="10.0" />
+      <Slider fx:id="speedSlider" blockIncrement="1.0" layoutX="357.0" layoutY="666.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="28.0" prefWidth="302.0" showTickMarks="true" value="3.0" AnchorPane.bottomAnchor="12.0" />
+      <ComboBox fx:id="algorithmList" layoutX="735.0" layoutY="591.0" prefHeight="25.0" prefWidth="212.0" />
 
    </children>
 </AnchorPane>

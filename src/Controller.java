@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
 
@@ -21,10 +22,12 @@ public class Controller {
     @FXML public Button btnGenerate;
     public AnchorPane pane;
     public Slider speedSlider;
-    int array[];
-    int sliderValue, delayMultiplier =1;
+    public ComboBox<String> algorithmList;
+    private int array[];
+    private int sliderValue, delayMultiplier =8;
+    private String algorithm="Bubble Sort";
     private int delay=30;
-    boolean sorting;
+    private boolean bubbleSorting,move;
     private Random rand =new Random();
 
     public void arrayGenerate() {
@@ -69,13 +72,14 @@ public class Controller {
 
     private int i=0,j=0,count=0;
     private Node n;
-    public void arraySort() {
+    public void bubbleSort() {
         setDelay();
-        sorting=true;
+        bubbleSorting =true;
         btnSort.setDisable(true);
         btnGenerate.setDisable(true);
         sizeSlider.setDisable(true);
         speedSlider.setDisable(true);
+        algorithmList.setDisable(true);
 
         Timer outerTimer =new Timer();
         outerTimer.scheduleAtFixedRate(new TimerTask() {                       //outer for loop
@@ -86,10 +90,12 @@ public class Controller {
                 innerTimer.scheduleAtFixedRate(new TimerTask() {               //inner for loop
                     @Override
                     public void run() {
+                        move=false;
                         if (array[j]>array[j+1]){                              //bubble sort algorithm
                             int t=array[j];
                             array[j]=array[j+1];
                             array[j+1]=t;
+                            move=true;
                         }else count++;
 
                         Platform.runLater(() -> updateChart(array));
@@ -101,7 +107,8 @@ public class Controller {
                             btnGenerate.setDisable(false);
                             sizeSlider.setDisable(false);
                             speedSlider.setDisable(false);
-                            sorting=false;
+                            algorithmList.setDisable(false);
+                            bubbleSorting =false;
                             j=0;
                             i=0;
                         }
@@ -122,10 +129,15 @@ public class Controller {
                     btnGenerate.setDisable(false);
                     sizeSlider.setDisable(false);
                     speedSlider.setDisable(false);
-                    sorting=false;
+                    algorithmList.setDisable(false);
+                    bubbleSorting =false;
                 }
             }
         },0,array.length *delay+10);
+    }
+
+    private void selectionSort() {
+        //TODO do this
     }
 
 
@@ -140,7 +152,7 @@ public class Controller {
         BCArray.getData().setAll(series);
         BCArray.setLegendVisible(true);
 
-        if (sorting){
+        if (bubbleSorting){
             BCArray.setTitle("Bubble Sorting Array");                        //nice
             BCArray.lookupAll(".default-color0.chart-bar")
                     .forEach(n -> n.setStyle("-fx-bar-fill: #202020;"));                              //all bars
@@ -148,9 +160,13 @@ public class Controller {
             BCArray.setStyle("-fx-background-color: #ccebff;");
             pane.setStyle("-fx-background-color: #ccebff");                                          //application bg
             n = BCArray.lookup(".data"+j+".chart-bar");                                            // J and i
-            n.setStyle("-fx-bar-fill: #ff0000");
+            if(move){
+                n.setStyle("-fx-bar-fill: #ff0000");
+            }else
+                n.setStyle("-fx-bar-fill: green");
+
             n = BCArray.lookup(".data"+(j+1)+".chart-bar");
-            n.setStyle("-fx-bar-fill: #ff0000");
+            n.setStyle("-fx-bar-fill: green");
         }else {
             BCArray.setTitle("Random Array  of "+array.length+" elements");
             BCArray.lookup(".chart-plot-background").setStyle("-fx-background-color: light-grey;");//chart bg
@@ -185,6 +201,31 @@ public class Controller {
                     setDelay();
                 }
         );
+
+        algorithmList.getItems().add("Bubble Sort");
+        algorithmList.getItems().add("Selection Sort");
+        algorithmList.getSelectionModel().select(0);
+
+        algorithmList.getSelectionModel().selectedItemProperty().addListener(
+                (options, oldValue, newValue) ->
+                {
+                    if (newValue.equals(oldValue))
+                        return;
+                    algorithm= newValue;
+                    arrayGenerate();
+                });
+
     }
 
+    public void sort() {                                   //button press pe
+        switch (algorithm){
+            case "Bubble Sort":
+                bubbleSort();
+                break;
+            case "Selection Sort":
+                selectionSort();
+                break;
+
+        }
+    }
 }
