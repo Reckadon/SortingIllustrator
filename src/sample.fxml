@@ -43,7 +43,7 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <BarChart fx:id="BCArray" animated="false" barGap="2.0" categoryGap="1.0" layoutX="16.0" layoutY="10.0" prefHeight="571.0" prefWidth="951.0" title="Bubble Sort" AnchorPane.bottomAnchor="134.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BarChart fx:id="BCArray" animated="false" barGap="2.0" categoryGap="1.0" layoutX="30.0" layoutY="30.0" prefHeight="584.0" prefWidth="970.0" title="Bubble Sort" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>

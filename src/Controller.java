@@ -71,15 +71,10 @@ public class Controller {
     }
 
     private int i=0,j=0,count=0;
-    private Node n;
     public void bubbleSort() {
+        disableAll();
         setDelay();
         bubbleSorting =true;
-        btnSort.setDisable(true);
-        btnGenerate.setDisable(true);
-        sizeSlider.setDisable(true);
-        speedSlider.setDisable(true);
-        algorithmList.setDisable(true);
 
         Timer outerTimer =new Timer();
         outerTimer.scheduleAtFixedRate(new TimerTask() {                       //outer for loop
@@ -103,11 +98,7 @@ public class Controller {
                         if (count==array.length-1){
                             innerTimer.cancel();
                             outerTimer.cancel();
-                            btnSort.setDisable(false);
-                            btnGenerate.setDisable(false);
-                            sizeSlider.setDisable(false);
-                            speedSlider.setDisable(false);
-                            algorithmList.setDisable(false);
+                            enableAll();
                             bubbleSorting =false;
                             j=0;
                             i=0;
@@ -125,22 +116,80 @@ public class Controller {
                     outerTimer.cancel();
                     i=0;
                     j=0;
-                    btnSort.setDisable(false);
-                    btnGenerate.setDisable(false);
-                    sizeSlider.setDisable(false);
-                    speedSlider.setDisable(false);
-                    algorithmList.setDisable(false);
+                    enableAll();
                     bubbleSorting =false;
                 }
             }
         },0,array.length *delay+10);
     }
 
-    private void selectionSort() {
-        //TODO do this
+    private void enableAll() {
+        btnSort.setDisable(false);
+        btnGenerate.setDisable(false);
+        sizeSlider.setDisable(false);
+        speedSlider.setDisable(false);
+        algorithmList.setDisable(false);
     }
 
+    private void disableAll() {
+        btnSort.setDisable(true);
+        btnGenerate.setDisable(true);
+        sizeSlider.setDisable(true);
+        speedSlider.setDisable(true);
+        algorithmList.setDisable(true);
+    }
 
+    private boolean selectionSorting;
+    private void selectionSort() {
+        selectionSorting=true;
+        System.out.println(Arrays.toString(array));
+        setDelay();
+        disableAll();
+        outerTimer();
+    }
+
+    private int currentPos=0, currentMinIndex =0, startingPos = 0;
+    private void outerTimer() {
+        //not a timer but named it for understanding
+
+        currentMinIndex = startingPos;
+        currentPos = startingPos;
+
+        Timer innerTimer = new Timer();
+        innerTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                currentPos++;
+                if (startingPos==array.length-1){
+                    innerTimer.cancel();
+                    System.out.println("Sorted " +Arrays.toString(array));
+                    enableAll();
+                    startingPos = 0;
+                    selectionSorting=false;
+                    Platform.runLater(() -> updateChart(array));
+                    return;
+                }
+                if (array[currentPos]< array[currentMinIndex]){
+                    currentMinIndex = currentPos;
+                }
+
+                Platform.runLater(() -> updateChart(array));
+
+                if (currentPos==array.length-1){
+                    int t=array[startingPos];
+                    array[startingPos]= array[currentMinIndex];
+                    array[currentMinIndex]=t;
+
+                    startingPos++;
+                    innerTimer.cancel();
+                    outerTimer();
+                }
+            }
+        },0,delay);
+
+    }
+
+    private Node n;
     public void updateChart(int[] Tarray) {                    //use this method to put data on the chart
         BCArray.getData().clear();
         BCArray.layout();
@@ -150,7 +199,7 @@ public class Controller {
         }
         series.setName("Numbers");
         BCArray.getData().setAll(series);
-        BCArray.setLegendVisible(true);
+        BCArray.setLegendVisible(false);
 
         if (bubbleSorting){
             BCArray.setTitle("Bubble Sorting Array");                        //nice
@@ -167,7 +216,26 @@ public class Controller {
 
             n = BCArray.lookup(".data"+(j+1)+".chart-bar");
             n.setStyle("-fx-bar-fill: green");
-        }else {
+        }
+        else if (selectionSorting){
+            BCArray.setTitle("Selection Sorting Array");                        //nice
+            BCArray.lookupAll(".default-color0.chart-bar")
+                    .forEach(n -> n.setStyle("-fx-bar-fill: #202020;"));                              //all bars
+            BCArray.lookup(".chart-plot-background").setStyle("-fx-background-color: #ccebff;");   //chart bg
+            BCArray.setStyle("-fx-background-color: #ccebff;");
+            pane.setStyle("-fx-background-color: #ccebff");                                          //application bg
+            for (int k = 0; k <startingPos ; k++) {
+                n = BCArray.lookup(".data"+k+".chart-bar");
+                n.setStyle("-fx-bar-fill: #00ff00");              //sorted part
+            }
+            n = BCArray.lookup(".data"+currentPos+".chart-bar");
+            n.setStyle("-fx-bar-fill: #cc00cc");
+            n = BCArray.lookup(".data"+currentMinIndex+".chart-bar");
+            n.setStyle("-fx-bar-fill: red");
+            n = BCArray.lookup(".data"+startingPos+".chart-bar");
+            n.setStyle("-fx-bar-fill: green");
+        }
+        else {
             BCArray.setTitle("Random Array  of "+array.length+" elements");
             BCArray.lookup(".chart-plot-background").setStyle("-fx-background-color: light-grey;");//chart bg
             BCArray.setStyle("-fx-background-color: light-grey;");
