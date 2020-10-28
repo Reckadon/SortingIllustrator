@@ -5,6 +5,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
 
@@ -23,6 +24,8 @@ public class Controller {
     public AnchorPane pane;
     public Slider speedSlider;
     public ComboBox<String> algorithmList;
+    public Label complexityLabel;
+    public Label speedLabel;
     private int array[];
     private int sliderValue, delayMultiplier =8;
     private String algorithm="Bubble Sort";
@@ -68,6 +71,7 @@ public class Controller {
         else if(array.length <=60) delay = 10* delayMultiplier;
         else if(array.length <=75) delay = 8* delayMultiplier;
         else delay = 5* delayMultiplier;//iske aage mera gpu marjaata lol
+        speedLabel.setText("Simulated Time Taken By Each Loop: "+delay+"ms");
     }
 
     private int i=0,j=0,count=0;
@@ -142,14 +146,13 @@ public class Controller {
     private boolean selectionSorting;
     private void selectionSort() {
         selectionSorting=true;
-        System.out.println(Arrays.toString(array));
         setDelay();
         disableAll();
-        outerTimer();
+        selectionSortingTimer();
     }
 
     private int currentPos=0, currentMinIndex =0, startingPos = 0;
-    private void outerTimer() {
+    private void selectionSortingTimer() {
         //not a timer but named it for understanding
 
         currentMinIndex = startingPos;
@@ -162,7 +165,6 @@ public class Controller {
                 currentPos++;
                 if (startingPos==array.length-1){
                     innerTimer.cancel();
-                    System.out.println("Sorted " +Arrays.toString(array));
                     enableAll();
                     startingPos = 0;
                     selectionSorting=false;
@@ -179,14 +181,64 @@ public class Controller {
                     int t=array[startingPos];
                     array[startingPos]= array[currentMinIndex];
                     array[currentMinIndex]=t;
-
                     startingPos++;
                     innerTimer.cancel();
-                    outerTimer();
+                    selectionSortingTimer();
                 }
             }
         },0,delay);
+    }
 
+    private boolean insertionSorting;
+    private int key;                   //marks unsorted array start
+    private void insertionSort() {
+        insertionSorting=true;
+        key=1;
+        setDelay();
+        disableAll();
+        insertionSortTimer();
+    }
+    private void insertionSortTimer() {
+        //not a timer but named it for understanding
+        currentPos = key;
+
+        Timer innerTimer = new Timer();
+        innerTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (key==array.length){
+                    key=1;
+                    insertionSorting=false;
+                    enableAll();
+                    innerTimer.cancel();
+                    Platform.runLater(() -> updateChart(array));
+                    return;
+                }
+                currentPos--;
+
+                if (array[currentPos]>array[currentPos+1]){
+                    int t=array[currentPos+1];
+                    array[currentPos+1]=array[currentPos];
+                    array[currentPos]=t;
+                }else {
+                    key++;
+                    System.out.println(key);
+
+                    innerTimer.cancel();
+                    insertionSortTimer();
+                }
+
+                Platform.runLater(() -> updateChart(array));
+
+                if (currentPos<=0){
+                    key++;
+                    System.out.println(key);
+
+                    innerTimer.cancel();
+                    insertionSortTimer();
+                }
+            }
+        },0,delay);
     }
 
     private Node n;
@@ -235,6 +287,22 @@ public class Controller {
             n = BCArray.lookup(".data"+startingPos+".chart-bar");
             n.setStyle("-fx-bar-fill: green");
         }
+        else if(insertionSorting){
+            BCArray.setTitle("Insertion Sorting Array");                        //nice
+            BCArray.lookupAll(".default-color0.chart-bar")
+                    .forEach(n -> n.setStyle("-fx-bar-fill: #202020;"));                              //all bars
+            BCArray.lookup(".chart-plot-background").setStyle("-fx-background-color: #ccebff;");   //chart bg
+            BCArray.setStyle("-fx-background-color: #ccebff;");
+            pane.setStyle("-fx-background-color: #ccebff");                                          //application bg
+            for (int k = 0; k <key ; k++) {
+                n = BCArray.lookup(".data"+k+".chart-bar");
+                n.setStyle("-fx-bar-fill: #00ff00");              //sorted part
+            }
+            n = BCArray.lookup(".data"+key+".chart-bar");
+            n.setStyle("-fx-bar-fill: red");
+            n = BCArray.lookup(".data"+currentPos+".chart-bar");
+            n.setStyle("-fx-bar-fill: #cc00cc");
+        }
         else {
             BCArray.setTitle("Random Array  of "+array.length+" elements");
             BCArray.lookup(".chart-plot-background").setStyle("-fx-background-color: light-grey;");//chart bg
@@ -248,6 +316,7 @@ public class Controller {
     @FXML
     public void initialize() {
         arrayGenerate();
+        setDelay();
         sizeSlider.valueProperty().addListener(
                 (options, oldValue, newValue) ->
                 {
@@ -255,6 +324,7 @@ public class Controller {
                         return;
                     sliderValue=newValue.intValue();
                     arrayGenerate();
+                    setDelay();
                 }
         );
         sizeSlider.setShowTickLabels(true);               //ye kya kiya hai??? slider pe numbers
@@ -272,6 +342,7 @@ public class Controller {
 
         algorithmList.getItems().add("Bubble Sort");
         algorithmList.getItems().add("Selection Sort");
+        algorithmList.getItems().add("Insertion Sort");
         algorithmList.getSelectionModel().select(0);
 
         algorithmList.getSelectionModel().selectedItemProperty().addListener(
@@ -280,6 +351,17 @@ public class Controller {
                     if (newValue.equals(oldValue))
                         return;
                     algorithm= newValue;
+                    switch (algorithm){
+                        case "Bubble Sort":
+                            complexityLabel.setText("Complexity of Bubble Sort: О(n^2)");
+                            break;
+                        case "Selection Sort":
+                            complexityLabel.setText("Complexity of Selection Sort: О(n^2)");
+                            break;
+                        case "Insertion Sort":
+                            complexityLabel.setText("Complexity of insertion Sort: О(n^2)");
+                            break;
+                    }
                     arrayGenerate();
                 });
 
@@ -293,7 +375,9 @@ public class Controller {
             case "Selection Sort":
                 selectionSort();
                 break;
-
+            case "Insertion Sort":
+                insertionSort();
+                break;
         }
     }
 }
