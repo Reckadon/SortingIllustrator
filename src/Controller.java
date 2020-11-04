@@ -1,4 +1,5 @@
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
@@ -7,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.util.Arrays;
@@ -222,7 +224,6 @@ public class Controller {
                     array[currentPos]=t;
                 }else {
                     key++;
-                    System.out.println(key);
 
                     innerTimer.cancel();
                     insertionSortTimer();
@@ -364,6 +365,10 @@ public class Controller {
                     }
                     arrayGenerate();
                 });
+
+        //button style
+        btnGenerate.setOnMouseEntered(e -> { btnGenerate.setStyle("-fx-background-color :  #ffe6e6 "); });
+        btnGenerate.setOnMouseExited(e -> { btnGenerate.setStyle("-fx-background-color :   #ffcccc"); });
 
     }
 

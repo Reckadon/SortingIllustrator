@@ -22,9 +22,9 @@
       <Slider fx:id="sizeSlider" layoutX="356.0" layoutY="616.0" majorTickUnit="10" max="95" min="5" prefHeight="88.0" prefWidth="302.0" showTickLabels="true" showTickMarks="true" value="10" AnchorPane.bottomAnchor="20.0">
          </Slider>
       <Label layoutX="486.0" layoutY="616.0" prefHeight="17.0" prefWidth="88.0" text="Array Size" textAlignment="CENTER" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="456.0" AnchorPane.rightAnchor="456.0" />
-      <Button fx:id="btnGenerate" layoutX="72.0" layoutY="616.0" mnemonicParsing="false" onMouseClicked="#arrayGenerate" prefHeight="63.0" prefWidth="197.0" text="Generate New Array" AnchorPane.bottomAnchor="30.0">
+      <Button fx:id="btnGenerate" layoutX="75.0" layoutY="614.0" mnemonicParsing="false" onMouseClicked="#arrayGenerate" prefHeight="63.0" prefWidth="228.0" style="-fx-background-color: #ffcccc;" text="Generate New Array" AnchorPane.bottomAnchor="27.0">
          <font>
-            <Font name="Arial" size="18.0" />
+            <Font name="Franklin Gothic Demi" size="21.0" />
          </font>
          <textFill>
             <LinearGradient endX="0.6666666666666667" endY="1.0" startX="0.6571428571428571">
