@@ -7,7 +7,8 @@ JavaFX Sorting Visualizer<br>
 <li>~~~~~~~~~~~~~~~~~~~~🖥UI~~~~~~~~~~~~~~~~~~~~~~</li>
 <img src='./img/main.png' width='500px'>
 <hr>
-    <img src='./img/bubble.png' align='left' width='400px'>
-    <img src='./img/seelction.png' align='left' width='400px'>
-    <img src='./img/insertion.png' align='left' width='400px'>
-  
+<img src='./img/bubble.png' align='left' width='400px'>
+<img src='./img/seelction.png' align='right' width='400px'><br><br><br>
+<div>
+<img src='./img/insertion.png' align='centre' width='400px'>
+  </div>
