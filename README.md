@@ -12,7 +12,7 @@ JavaFX Sorting Visualizer<br>
     <img src='./img/bubble.png' align='left' width='200px'>
   </li>
   <li>
-    <img src='./img/selection.png' align='left' width='200px'>
+    <img src='./img/seelction.png' align='left' width='200px'>
   </li>
   <li>
     <img src='./img/insertion.png' align='left' width='200px'>
