@@ -9,6 +9,6 @@ JavaFX Sorting Visualizer<br>
 <hr>
 <img src='./img/bubble.png' align='left' width='400px'>
 <img src='./img/seelction.png' align='right' width='400px'><br><br><br>
-<div>
-<img src='./img/insertion.png' align='centre' width='400px'>
-  </div>
+<hr>
+<img src='./img/insertion.png' align='center' width='400px'>
+
