@@ -7,8 +7,23 @@ JavaFX Sorting Visualizer<br>
 <li>~~~~~~~~~~~~~~~~~~~~🖥UI~~~~~~~~~~~~~~~~~~~~~~</li>
 <img src='./img/main.png' width='500px'>
 <hr>
-<img src='./img/bubble.png' align='left' width='400px'>
-<img src='./img/seelction.png' align='right' width='400px'><br><br><br>
-<hr>
-<img src='./img/insertion.png' align='center' width='400px'>
+<details>
+  <summary>
+    <img src='./img/bubble.png' width='400px'>
+  </summary>
+        💧Bubble Sort
+</details>
+<details>
+  <summary>
+    <img src='./img/seelction.png' width='400px'>
+  </summary>
+        🔹Selection Sort
+</details>
+<details>
+  <summary>
+    <img src='./img/insertion.png' width='400px'>
+  </summary>
+        📦Insertion Sort
+</details>
+
 
