@@ -9,12 +9,12 @@ JavaFX Sorting Visualizer<br>
 <hr>
 <ul>
   <li>
-    <img src='./img/bubble.png' align='left' width='200px'>
+    <img src='./img/bubble.png' align='left' width='400px'>
   </li>
   <li>
-    <img src='./img/seelction.png' align='left' width='200px'>
+    <img src='./img/seelction.png' align='left' width='400px'>
   </li>
   <li>
-    <img src='./img/insertion.png' align='left' width='200px'>
+    <img src='./img/insertion.png' align='left' width='400px'>
   </li>
 </ul>
